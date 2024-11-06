@@ -38,4 +38,4 @@ Well, there is NO installation. Well you need a few reqirements.
 - and, that your conputer follows Part 15 of the FCC Rules. (OPTIONAL.)
 
 
-Download the files from the (Releases Page)[https://github.com/TigerIS12024/TWCRundown/releases/tag/Scrolls]
+Download the files from the [Releases Page.](https://github.com/TigerIS12024/TWCRundown/releases/tag/Scrolls)
