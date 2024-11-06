@@ -12,7 +12,11 @@ You can add anything you want in the ``const crawls`` line, starting with a ``'`
 'This is a Test',
 ```
 
-No ' at any craw feld. This wil cause a syntax error causing the script to fail.
+No ' at any craw feld, like this:
+```
+'This i's a test',
+```
+This wil cause a syntax error causing the script to fail.
 
 If you want to add a block, add a ``#`` and type anything uppercase like:
 
