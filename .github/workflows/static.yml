@@ -1,0 +1,169 @@
+<body>
+  <div id="crawl">
+    <div id="container"></div>
+  </div>
+    <script>
+    const speed = 2;
+    const crawls = [
+      '#WELCOME',
+      'Thanks for tuning into Tigers Weather Stream. Today is November 6, 2024.',
+      '#WEATHER ALERTS',
+      'Weather alerts from the National Weather Service will be on the stream.',
+      '#NOW PLAYING',
+      'The Weather Channel or LOT8s.',
+      '#UPDATES AND ANOUNCEMENTS',
+      'No updates or anouncements at this time.',
+    ];
+
+    let crawlIndex = 0;
+    const container = document.getElementById('container');
+    const elCrawl = document.getElementById('crawl');
+    const crawlLeftOffset = elCrawl.getBoundingClientRect().left;
+    const crawlRightOffset = elCrawl.getBoundingClientRect().right;
+
+    function isCrawlShort() {
+      let lastEl = document.querySelector("#container > div:last-child");
+      if (!lastEl) return true;
+      let rightStop = lastEl.getBoundingClientRect().right;
+      return rightStop < crawlRightOffset;
+    }
+
+    function loadCrawls() {
+      while (isCrawlShort()) {
+        let crawl = crawls[crawlIndex];
+        let isCategory = false;
+
+        if (crawl.substr(0, 1) === '#') {
+          crawl = crawl.substr(1);
+          isCategory = true;
+        }
+
+        let lastEl = document.querySelector("#container > *:last-child");
+
+        if (isCategory) {
+          container.innerHTML += `<div data-id='${crawlIndex}' class='category'>${crawl}</div>`;
+        } else if (!lastEl || lastEl.classList.contains("category")) {
+          container.innerHTML += `<div class='headline-group'><div data-id='${crawlIndex}' class='headline'>${crawl}</div></div>`;
+        } else if (lastEl.classList.contains("headline-group")) {
+          lastEl.innerHTML += `<div data-id='${crawlIndex}' class='headline'>${crawl}</div>`;
+        }
+
+        crawlIndex++;
+        if (crawlIndex >= crawls.length) {
+          crawlIndex = 0; // Cycle back to the start
+        }
+      }
+    }
+
+    loadCrawls();
+
+    let pos = 0;
+    let activeCategory, activeCategoryPos = null, x;
+    let inCategory = false;
+    let upNextCategory = false;
+    let nextCategory;
+
+    function crawl() {
+      pos = pos - speed;
+
+      activeCategory = document.querySelector("#container .category:first-child");
+      activeCategoryLeft = activeCategory.getBoundingClientRect().left;
+      activeCategoryRight = activeCategory.getBoundingClientRect().right;
+
+      if (activeCategoryPos == null) {
+        activeCategoryPos = activeCategory.offsetLeft;
+      }
+
+      let nextCategoryLeft = null;
+      if (nextCategory) {
+        nextCategoryLeft = document.querySelectorAll("#container > .category")[1].getBoundingClientRect().left;
+      }
+
+      if (nextCategory && (nextCategoryLeft <= crawlLeftOffset)) {
+        pos = 0;
+        container.style.left = '0px';
+
+        let temp = document.querySelectorAll("#container > .category")[1];
+        let sibling = temp.previousSibling;
+
+        while (sibling) {
+          sibling.remove();
+          sibling = temp.previousSibling;
+        }
+
+        upNextCategory = false;
+        inCategory = false;
+
+      } else if (nextCategory && (nextCategoryLeft <= activeCategoryRight)) {
+        if (!upNextCategory) {
+          console.log('Resetting pos = 0');
+          upNextCategory = true;
+          pos = 0;
+        }
+        container.style.left = pos + 'px';
+
+      } else if (activeCategoryLeft <= crawlLeftOffset) {
+        if (!inCategory) {
+          console.log('Resetting pos = 0');
+          pos = 0;
+          inCategory = true;
+          nextCategory = document.querySelectorAll("#container > .category")[1];
+        }
+        activeCategory.nextSibling.style.marginLeft = pos + 'px';
+
+      } else {
+        container.style.left = pos + 'px';
+      }
+
+      loadCrawls();
+      requestAnimationFrame(crawl);
+    }
+
+    crawl();
+
+    const blocks = document.querySelectorAll('.block');
+    blocks.forEach(block => {
+      block.dataset.moving = 'false'; // Set initial moving state to false
+    });
+
+    function detectCollision(block) {
+      const blockRect = block.getBoundingClientRect();
+      blocks.forEach(otherBlock => {
+        if (block !== otherBlock) {
+          const otherRect = otherBlock.getBoundingClientRect();
+          if (
+            blockRect.left < otherRect.right &&
+            blockRect.right > otherRect.left &&
+            blockRect.top < otherRect.bottom &&
+            blockRect.bottom > otherRect.top
+          ) {
+            // Collision detected
+            if (block.dataset.moving === 'false') {
+              block.dataset.moving = 'true'; // Change state to moving
+              moveBlock(block);
+            }
+          }
+        }
+      });
+    }
+
+    function moveBlock(block) {
+      const initialLeft = parseInt(block.style.left, 10);
+      block.style.left = (initialLeft + 10) + 'px'; // Move block to the right
+      setTimeout(() => {
+        block.dataset.moving = 'false'; // Allow it to stop again after moving
+      }, 500); // Time to move before it can be hit again
+    }
+
+    function update() {
+      blocks.forEach(block => {
+        detectCollision(block);
+      });
+      requestAnimationFrame(update);
+    }
+
+    update();
+  </script>
+</body>
+</html>
+
