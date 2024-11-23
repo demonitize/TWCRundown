@@ -1,0 +1,73 @@
+@font-face{
+    font-family:AkkoLight;
+    src:url(./Akko-Light.woff2) format("woff2")
+  }
+  @font-face {
+    font-family: "Tungsten-Medium";
+    src: url("./Tungsten-Medium.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+  }
+  p {
+    margin: 0;
+  }
+  #crawl {
+    color: #FFF;
+    position: absolute;
+    
+    top: 863px;
+    right: 0;
+
+    height: 47px;
+    width: 1675px;
+
+    overflow: hidden;
+  }
+  .red {
+    background: #0A1014;
+  }
+  .normal {
+    background: #1E2B31;
+  }
+  #container {
+    display: flex;
+    position: relative;
+    left: 0;
+  }
+  .category {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 47px;
+    padding: 2px 10px;
+    background: #FFF;
+    color: #000;
+    position: relative;
+
+    font-size: 38px;
+    font-family: "Tungsten-Medium";
+    z-index: 10;
+  }
+  .headline-group {
+    display: flex;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .headline {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+
+    font-family: AkkoLight;
+    font-size: 30px;
+  }
