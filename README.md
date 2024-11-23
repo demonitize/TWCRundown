@@ -12,7 +12,7 @@ You can add anything you want in the ``const crawls`` line, starting with a ``\`
 `This is a Test`,
 ```
 
-Avoid using backticks (` \` `) in crawl fields, like this:
+Avoid using backticks (`) in crawl fields, like this:
 ```
 `This i`s a test`,
 ```
