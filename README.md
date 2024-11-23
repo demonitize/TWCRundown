@@ -5,37 +5,46 @@
 
 This repository focuses on The Weather Channels rundown used from November 2013 to August 2019. Before using, adding, modyfying or testing, please read the following information.
 
-You can set any amout of craws from 1 to 90. **VERY** higher numbers are NOT allowed. 
+You can set any amount of craws from 1 to 90. Adding more than 90 crawls is NOT allowed. 
 
-You can add anything you want in the ``const crawls`` line, starting with a ``'`` and ending with a ``',`` at the end of the craw. Here is example:
+You can add anything you want in the ``const crawls`` line, starting with a ``\`\`` and ending with a ``\`,`` at the end of the craw. Here is an example:
 ```
-'This is a Test',
+`This is a Test`,
 ```
 
-No ' at any craw feld, like this:
+Avoid using backticks (` \` `) in crawl fields, like this:
 ```
-'This i's a test',
+`This i`s a test`,
 ```
-This wil cause a syntax error causing the script to fail.
+This will cause a syntax error cause the script to fail. (This can be fixed by adding a backslash (`\`) before the backtick)
+Example:
+```
+`This i\`s a test`,
+```
 
 If you want to add a block, add a ``#`` and type anything uppercase like:
 
 ```
-'#THIS IS A TEST',
+`#THIS IS A TEST`,
 ```
 
-Open the ``.html`` file in a fast graphics card computer for the best experience.
+Open the desired ``.html`` file on a fast graphics card computer for the best experience.
 
 
 
 
 # How to install and run?
 
-Well, there is NO installation. Well you need a few reqirements.
+You download the files, and then extract them. 
 
-- Computer with a GTX 1050 Graphics Card
-- Running a 64 Bit Operating System
-- and, that your conputer follows Part 15 of the FCC Rules. (OPTIONAL.)
+# System Reqirements
+
+- OS: Microsoft Windows XP Service Pack 2
+- CPU: Intel Celeron
+- RAM: 2 GB RAM
+- Graphics: Integrated Graphics
+- Storage: 5 MB
+- and, that your computer does not violate the [Geneva Convention](https://vrc-kmart.github.io/aisle-6/geneva.pdf). (OPTIONAL.)
 
 
-Download the files from the [Releases Page.](https://github.com/TigerIS12024/TWCRundown/releases/tag/Scrolls)
+Download the files from the [Releases Page.](https://github.com/demonitize/TWCRundown/releases/tag/1-1)
